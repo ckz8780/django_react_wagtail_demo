@@ -1,0 +1,34 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "This repo demonstrates the basic integration of Django as a back end, React as a front end, and includes the Wagtail CMS for content management. This repo acts as a test environment for experimention w/ Wagtail in an existing project that already uses React and Django and several apps as well as an existing database you do not want to break. It's not secure in any way and shouldn't be used in production.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development ./frontend/src/index.js --output ./frontend/static/js_build/main.js",
+    "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/js_build/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ckz8780/django_react_wagtail_demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ckz8780/django_react_wagtail_demo/issues"
+  },
+  "homepage": "https://github.com/ckz8780/django_react_wagtail_demo#readme",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  }
+}

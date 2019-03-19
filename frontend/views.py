@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+def frontend(request):
+    context = {}
+    template = 'frontend.html'
+    return render(request, template, context)
