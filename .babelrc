@@ -3,8 +3,6 @@
         "env", "react"
     ],
     "plugins": [
-        "transform-class-properties",
-        "transform-object-rest-spread",
-        "jsx-control-statements"
+        "transform-class-properties"
     ]
 }
