@@ -86,14 +86,26 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/src/components/Frontend.js":
+/*!*********************************************!*\
+  !*** ./frontend/src/components/Frontend.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("throw new Error(\"Module parse failed: Unexpected token (5:1)\\nYou may need an appropriate loader to handle this file type.\\n| \\r\\n| const Frontend = () => (\\r\\n> \\t<div>\\r\\n| \\t\\t<p>Hello! It works!</p>\\r\\n| \\t</div>\\r\");\n\n//# sourceURL=webpack:///./frontend/src/components/Frontend.js?");
+
+/***/ }),
+
 /***/ "./frontend/src/index.js":
 /*!*******************************!*\
   !*** ./frontend/src/index.js ***!
   \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (6:26)\\nYou may need an appropriate loader to handle this file type.\\n| \\r\\n| const wrapper = document.getElementById(\\\"frontend\\\");\\r\\n> wrapper ? ReactDOM.render(<Frontend />, wrapper) : null;\");\n\n//# sourceURL=webpack:///./frontend/src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Frontend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Frontend */ \"./frontend/src/components/Frontend.js\");\n/* harmony import */ var _components_Frontend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_Frontend__WEBPACK_IMPORTED_MODULE_0__);\n\n\n//# sourceURL=webpack:///./frontend/src/index.js?");
 
 /***/ })
 
