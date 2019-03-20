@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
-	<a class="navbar-brand" href="/">BRAND HERE</a>
+	<a class="navbar-brand" href="/">Django/React/Wagtail Demo</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-main" aria-controls="nav-main" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -10,10 +10,7 @@
 					<a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
+					<a class="nav-link {% if request.resolver_match.url_name == 'frontend' %}active{% endif %}" href="{% url 'frontend' %}">Frontend</a>
 				</li>
 			</ul>
 		</div>

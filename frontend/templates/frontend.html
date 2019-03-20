@@ -1,4 +1,10 @@
 {% extends "base.html" %}
-{% block content %}
+{% load staticfiles %}
+
+{% block core %}
 	<div id="frontend"></div>
+{% endblock %}
+
+{% block postloadjs %}
+	<script src="{% static 'js_build/main.js' %}"></script>
 {% endblock %}
