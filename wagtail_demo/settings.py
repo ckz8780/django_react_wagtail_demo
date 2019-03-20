@@ -146,4 +146,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-WAGTAIL_SITE_NAME = 'Django/React/Wagtail CMS'
+WAGTAIL_SITE_NAME = 'Django/React'
