@@ -16,7 +16,7 @@ class BlogIndexPage(Page):
     '''
     Blog index page - lists all posts in reverse chron order
     '''
-    
+
     class Meta:
         verbose_name = ('Blog Index Page')
         verbose_name_plural = ('Blog Index Pages')
@@ -103,6 +103,10 @@ class BlogTagIndexPage(Page):
     '''
     Tag index page - for displaying posts by tag name
     '''
+
+    class Meta:
+        verbose_name = ('Blog Tag Index Page')
+        verbose_name_plural = ('Blog Tag Index Pages')
 
     def get_context(self, request):
 
