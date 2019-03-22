@@ -1,6 +1,7 @@
 from django.db import models
+from django import forms
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
@@ -9,6 +10,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 import datetime
 
@@ -58,6 +60,7 @@ class BlogPost(Page):
     intro = models.CharField(max_length=250, blank=True)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=BlogPostTag, blank=True)
+    categories = ParentalManyToManyField('blog.PostCategory', blank=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -68,6 +71,7 @@ class BlogPost(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags'),
+            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="Post Info"),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
@@ -118,3 +122,22 @@ class BlogTagIndexPage(Page):
         context = super().get_context(request)
         context['posts'] = posts
         return context
+
+@register_snippet
+class PostCategory(models.Model):
+    name = models.CharField(max_length=255)
+    icon = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('icon'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Post Categories'
