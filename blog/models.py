@@ -112,26 +112,6 @@ class BlogPostGalleryImage(Orderable):
         FieldPanel('caption'),
     ]
 
-class BlogTagIndexPage(Page):
-    '''
-    Tag index page - for displaying posts by tag name
-    '''
-
-    class Meta:
-        verbose_name = ('Blog Tag Index Page')
-        verbose_name_plural = ('Blog Tag Index Pages')
-
-    def get_context(self, request):
-
-        # Filter by tag
-        tag = request.GET.get('tag')
-        posts = BlogPost.objects.filter(tags__name=tag)
-
-        # Update template context
-        context = super().get_context(request)
-        context['posts'] = posts
-        return context
-
 @register_snippet
 class PostCategory(models.Model):
     name = models.CharField(max_length=255)
