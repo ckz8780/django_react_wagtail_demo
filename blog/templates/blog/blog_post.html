@@ -40,10 +40,11 @@
 
     <div class="clearfix"></div>
     {% if page.tags.all.count %}
+	    {{ page }}
 	    <div class="tags">
 	        <h3>Tags</h3>
 	        {% for tag in page.tags.all %}
-	            <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button class="btn-info" type="button">{{ tag }}</button></a>
+	            <a href="{% pageurl page.get_parent %}?tag={{ tag }}"><button class="btn-info" type="button">{{ tag }}</button></a>
 	        {% endfor %}
 	    </div>
 	{% endif %}

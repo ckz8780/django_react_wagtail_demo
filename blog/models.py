@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.shortcuts import render
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -27,14 +28,22 @@ class BlogIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
-    ]
+    ]    
 
-    # Update context to include only published posts, ordered by reverse-chron
-    def get_context(self, request):
-        context = super().get_context(request)
-        posts = self.get_children().live().order_by('-first_published_at')
-        context['posts'] = posts
-        return context
+    # Allow filtering by tag
+    def serve(self, request):
+        # Get posts and order by reverse chron
+        posts = BlogPost.objects.child_of(self).live().order_by('-first_published_at')
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        if tag:
+            posts = posts.filter(tags__name=tag)
+
+        return render(request, self.template, {
+            'page': self,
+            'posts': posts,
+        })
 
 class BlogPostTag(TaggedItemBase):
     '''
