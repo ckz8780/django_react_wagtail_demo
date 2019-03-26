@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'home',
     'frontend',
     'blog',
+    'streams',
 ]
 
 MIDDLEWARE = [

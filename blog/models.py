@@ -11,10 +11,12 @@ from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
+
+from streams import blocks
 
 import datetime
 
@@ -37,20 +39,24 @@ class BlogIndexPage(Page):
     def serve(self, request):
         # Get posts and order by reverse chron
         posts = BlogPost.objects.child_of(self).live().order_by('-first_published_at')
+        advanced_posts = AdvancedBlogPost.objects.child_of(self).live().order_by('-first_published_at')
 
         # Filter by tag
         tag = request.GET.get('tag')
         if tag:
             posts = posts.filter(tags__name=tag)
+            advanced_posts = advanced_posts.filter(tags__name=tag)
 
         # Filter by author
         author = request.GET.get('author')
         if author:
             posts = posts.filter(author=User.objects.get(username=author))
+            advanced_posts = advanced_posts.filter(author=User.objects.get(username=author))
 
         return render(request, self.template, {
             'page': self,
             'posts': posts,
+            'advanced_posts': advanced_posts,
         })
 
 class BlogPostTag(TaggedItemBase):
@@ -140,3 +146,21 @@ class PostCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'Post Categories'
+
+class AdvancedBlogPost(Page):
+    '''
+    Advanced blog posts - a child of the blog index
+    using streamfields and blocks
+    '''
+
+    class Meta:
+        verbose_name = ('Advanced Blog Post')
+        verbose_name_plural = ('Advanced Blog Posts')
+
+    content = StreamField([
+        ("title_and_text", blocks.TitleAndTextBlock())
+    ])
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel("content")
+    ]

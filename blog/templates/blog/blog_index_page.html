@@ -17,6 +17,31 @@
     	</h4>
     {% endif %}
 
+    {% if advanced_posts %}
+	    <h1>Advanced Posts Using StreamFields:</h1>
+	    {% for post in advanced_posts %}
+		    {% with post=post.specific %}
+		        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+		        <p><span class="text-info">Posted:</span> {{ post.date }} 
+		        	{% if post.author %}
+			        	<span>
+			        		by <a href="{% pageurl page %}?author={{ post.author }}{% if request.GET.tag|length %}&tag={{ request.GET.tag }}{% endif %}">{{ post.author }}</a>
+			        	</span>
+	        		{% endif %}
+		        </p>
+		        <hr />
+
+		        {% with post.main_image as main_image %}
+		            {% if main_image %}{% image main_image fill-160x160 %}{% endif %}
+		        {% endwith %}
+
+		        <p>{{ post.intro }}</p>
+		        {{ post.body|richtext }}
+		    {% endwith %}
+		{% endfor %}
+	{% endif %}
+
+    <h1>Normal Posts:</h1>
     {% for post in posts %}
 	    {% with post=post.specific %}
 	        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
