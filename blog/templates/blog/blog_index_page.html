@@ -10,17 +10,27 @@
     <div class="intro">{{ page.intro|richtext }}</div>
 
     {% if request.GET.tag|length %}
-        <h4>Showing posts tagged "{{ request.GET.tag }}"</h4>
+        <h4>Showing posts tagged "{{ request.GET.tag }}"
+        	{% if request.GET.author|length %}
+	        	<span> by {{ request.GET.author }}</span>
+        	{% endif %}
+    	</h4>
     {% endif %}
 
     {% for post in posts %}
 	    {% with post=post.specific %}
 	        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-	        <p><span class="text-info">Posted:</span> {{ post.date }}</p>
+	        <p><span class="text-info">Posted:</span> {{ post.date }} 
+	        	{% if post.author %}
+		        	<span>
+		        		by <a href="{% pageurl page %}?author={{ post.author }}{% if request.GET.tag|length %}&tag={{ request.GET.tag }}{% endif %}">{{ post.author }}</a>
+		        	</span>
+        		{% endif %}
+	        </p>
 	        <hr />
 
 	        {% with post.main_image as main_image %}
-	            {% if main_image %}{% image main_image fill-160x100 %}{% endif %}
+	            {% if main_image %}{% image main_image fill-160x160 %}{% endif %}
 	        {% endwith %}
 
 	        <p>{{ post.intro }}</p>

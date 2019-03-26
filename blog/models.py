@@ -41,6 +41,11 @@ class BlogIndexPage(Page):
         if tag:
             posts = posts.filter(tags__name=tag)
 
+        # Filter by author
+        author = request.GET.get('author')
+        if author:
+            posts = posts.filter(author=User.objects.get(username=author))
+
         return render(request, self.template, {
             'page': self,
             'posts': posts,
@@ -66,7 +71,7 @@ class BlogPost(Page):
         verbose_name = ('Blog Post')
         verbose_name_plural = ('Blog Posts')
 
-    author = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField("Post date", default=datetime.date.today)
     intro = models.CharField(max_length=250, blank=True)
     body = RichTextField(blank=True)
