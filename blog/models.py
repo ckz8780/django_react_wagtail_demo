@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -65,6 +66,7 @@ class BlogPost(Page):
         verbose_name = ('Blog Post')
         verbose_name_plural = ('Blog Posts')
 
+    author = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField("Post date", default=datetime.date.today)
     intro = models.CharField(max_length=250, blank=True)
     body = RichTextField(blank=True)
@@ -78,6 +80,7 @@ class BlogPost(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
+            FieldPanel('author', widget=forms.Select),
             FieldPanel('date'),
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
