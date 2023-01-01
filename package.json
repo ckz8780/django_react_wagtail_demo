@@ -9,12 +9,12 @@
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/preset-env": "^7.4.1",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.3.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
